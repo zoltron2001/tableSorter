@@ -7,7 +7,10 @@ var TableSorter = {
   },
 
   quicksort: function(array) {
-    var partition = TableSorter.partition(array);
+    var partition   = TableSorter.partition(array);
+    // recurse
+    partition.left  = TableSorter.sort(partition.left);
+    partition.right = TableSorter.sort(partition.right); //
     return TableSorter.reconstructArray(partition);
   },
 
@@ -21,10 +24,11 @@ var TableSorter = {
       else if ( array[i] == pivot ) { middle.push(array[i]) }
       else if ( array[i] >  pivot ) {  right.push(array[i]) }
     }
-    // recurse
-    left  = TableSorter.sort(left);
-    right = TableSorter.sort(right);
     return {left: left, middle: middle, right: right}
+  },
+
+  sortPartition: function(partition) {
+
   },
 
   reconstructArray: function(partition) {
