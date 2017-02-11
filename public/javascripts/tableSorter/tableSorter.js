@@ -19,7 +19,7 @@ var TableSorter = {
         left   = [],
         middle = [],
         right  = [];
-    for (var i = 0; i < length; i++) {
+    for (var i = 0; i < array.length; i++) {
       if      ( array[i] <  pivot ) {   left.push(array[i]) }
       else if ( array[i] == pivot ) { middle.push(array[i]) }
       else if ( array[i] >  pivot ) {  right.push(array[i]) }
