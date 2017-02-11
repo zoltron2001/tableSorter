@@ -27,10 +27,6 @@ var TableSorter = {
     return {left: left, middle: middle, right: right}
   },
 
-  sortPartition: function(partition) {
-
-  },
-
   reconstructArray: function(partition) {
     var left   = partition.left,
         middle = partition.middle,
