@@ -1,40 +1,5 @@
 describe("TableSorter", function() {
 
-  var array, sortedArray;
-
-  beforeEach(function() {
-    array       = [7,0,5,2,1,5,3,8,4,-2];
-    sortedArray = [-2,0,1,2,3,4,5,5,7,8];
-  });
-
-  describe("sort", function() {
-
-    it("", function() {
-    });
-
-  });
-
-  // sort: function(array) {
-  //   var length = array.length;
-  //   if ( length <= 1 ) { return array }
-  //   return TableSorter.quicksort(array)
-  // },
-
-  describe("quicksort", function() {
-
-    it("", function() {
-    });
-
-  });
-
-  // quicksort: function(array) {
-  //   var partition   = TableSorter.partition(array);
-  //   // recurse
-  //   partition.left  = TableSorter.sort(partition.left);
-  //   partition.right = TableSorter.sort(partition.right); //
-  //   return TableSorter.reconstructArray(partition);
-  // },
-
   describe("partition", function() {
     describe("return object", function() {
       var empty;
