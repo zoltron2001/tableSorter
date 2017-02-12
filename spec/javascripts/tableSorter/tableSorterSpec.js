@@ -68,12 +68,12 @@ describe("TableSorter", function() {
         });
       });
       describe("left/right",function() {
-        var partition,left,right;
+        var left,right;
         beforeEach(function() {
-          var lopsided = [0,1];
-          partition    = TableSorter.partition(lopsided);
-          left         = partition.left;
-          right        = partition.right;
+          var lopsided  = [0,1];
+          var partition = TableSorter.partition(lopsided);
+          left          = partition.left;
+          right         = partition.right;
         });
         it("at least one is empty", function() {
           leftEmpty  = left[0]  == undefined;
