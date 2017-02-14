@@ -1,17 +1,15 @@
-describe("TableSorter", function() {
+describe("Quicksort", function() {
 
   describe("sort", function() {
     it("sorts numerical", function() {
       var numerical = [6,2,1,-1,0,12,8];
-      expect(numerical).toEqual([-1,0,1,2,6,8,12]);
+      var sorted    = Quicksort.sort(numerical);
+      expect(sorted).toEqual([-1,0,1,2,6,8,12]);
     });
     it("sorts alphabetical", function() {
-      var numerical = ["c","d","i","a","f","f","w"];
-      expect(numerical).toEqual(["a","c","d","f","f","i","w"]);
-    });
-    it("sorts mixed", function() {
-      var mixed = [-1,"a",0,12,"z"];
-      expect(mixed).toEqual(["a","z",-1,0,12])
+      var alphabetical = ["c","d","i","a","f","f","w"];
+      var sorted    = Quicksort.sort(alphabetical);
+      expect(sorted).toEqual(["a","c","d","f","f","i","w"]);
     });
   });
 
@@ -19,7 +17,7 @@ describe("TableSorter", function() {
     describe("return object", function() {
       var empty;
       beforeEach(function() {
-        empty = TableSorter.partition([]);
+        empty = Quicksort.partition([]);
       });
       it("has left attribute", function() {
         expect(empty.left).toBeDefined();
@@ -35,7 +33,7 @@ describe("TableSorter", function() {
       describe("middle",function() {
         var middled;
         beforeEach(function() {
-          middled = TableSorter.partition([1,1,1]);
+          middled = Quicksort.partition([1,1,1]);
         });
         it("middle has elements", function() {
           expect(middled.middle).toEqual([1,1,1]);
@@ -51,7 +49,7 @@ describe("TableSorter", function() {
         var left,right;
         beforeEach(function() {
           var lopsided  = ["c","b"];
-          var partition = TableSorter.partition(lopsided);
+          var partition = Quicksort.partition(lopsided);
           left          = partition.left;
           right         = partition.right;
         });
@@ -78,7 +76,7 @@ describe("TableSorter", function() {
   describe("reconstructArray", function() {
     it("returns expected", function() {
       var partition = {left: [1], middle: [2], right: [3]};
-      var array     = TableSorter.reconstructArray(partition);
+      var array     = Quicksort.reconstructArray(partition);
       expect(array).toEqual([1,2,3]);
     });
   });
@@ -88,7 +86,7 @@ describe("TableSorter", function() {
     beforeEach(function() {
       returnValues = [];
       for (cycles = 0; cycles < 8; cycles++) {
-        returnValues.push(TableSorter.randomInteger(2));
+        returnValues.push(Quicksort.randomInteger(2));
       }
     });
     it("does not include cieling", function() {
