@@ -15,7 +15,7 @@ var TableSorter = {
   },
 
   partition: function(array) {
-    var pivot  = array[ TableSorter.randomInteger(length) ],
+    var pivot  = array[ TableSorter.randomInteger(array.length) ],
         left   = [],
         middle = [],
         right  = [];
