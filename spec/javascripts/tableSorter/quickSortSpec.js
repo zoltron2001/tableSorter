@@ -1,25 +1,27 @@
 describe("Quicksort", function() {
 
   describe("sort", function() {
-    it("sorts integers", function() {
-      var integers = [6,2,1,-1,0,12,8];
-      var sorted   = Quicksort.sort(integers);
-      expect(sorted).toEqual([-1,0,1,2,6,8,12]);
-    });
-    it("sorts alphabetical", function() {
-      var alphabetical = ["c","d","i","a","f","f","w"];
-      var sorted       = Quicksort.sort(alphabetical);
-      expect(sorted).toEqual(["a","c","d","f","f","i","w"]);
-    });
-    it("sorts words", function() {
-      var alphabetical = ["cat","dog","in","a","fine","fate","went"];
-      var sorted       = Quicksort.sort(alphabetical);
-      expect(sorted).toEqual(["a","cat","dog","fate","fine","in","went"]);
-    });
-    it("sorts mixed strings", function() {
-      var mixed  = ["c","1","i","5","f","f","-1"];
-      var sorted = Quicksort.sort(mixed);
-      expect(sorted).toEqual(['-1','1','5','c','f','f','i']);
+    describe("sorts", function() {
+      it("integers", function() {
+        var integers = [6,2,1,-1,0,12,8];
+        var sorted   = Quicksort.sort(integers);
+        expect(sorted).toEqual([-1,0,1,2,6,8,12]);
+      });
+      it("alphabetical", function() {
+        var alphabetical = ["c","d","i","a","f","f","w"];
+        var sorted       = Quicksort.sort(alphabetical);
+        expect(sorted).toEqual(["a","c","d","f","f","i","w"]);
+      });
+      it("words", function() {
+        var alphabetical = ["cat","dog","in","a","fine","fate","went"];
+        var sorted       = Quicksort.sort(alphabetical);
+        expect(sorted).toEqual(["a","cat","dog","fate","fine","in","went"]);
+      });
+      it("mixed strings", function() {
+        var mixed  = ["c","1","i","5","f","f","-1"];
+        var sorted = Quicksort.sort(mixed);
+        expect(sorted).toEqual(['-1','1','5','c','f','f','i']);
+      });
     });
   });
 
