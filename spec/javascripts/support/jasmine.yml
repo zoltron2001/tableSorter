@@ -12,9 +12,8 @@
 #
 src_files:
   - public/javascripts/**/*.js
-  # - spec/javascripts/support/jquery-3.1.1.js
-  # - spec/javascripts/support/jasmine-jquery.js
-  # - spec/javascripts/factories/**/*.js
+  - spec/javascripts/support/jquery-3.1.1.js
+  - spec/javascripts/support/jasmine-jquery.js
 
 # stylesheets
 #
