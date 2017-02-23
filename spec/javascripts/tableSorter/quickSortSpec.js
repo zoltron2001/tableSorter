@@ -1,54 +1,67 @@
 describe("Quicksort", function() {
 
+  var rows,row,getCell;
+
+  beforeEach(function() {
+    loadFixtures('table.html');
+    rows = $('tBody tr');
+    row  = rows[0];
+    getCell = function(rows,rowIndex,columnIndex) {
+      return rows[rowIndex].children[columnIndex].innerHTML
+    }
+  });
+
   describe("sort", function() {
     describe("sorts", function() {
       it("integers", function() {
-        var integers = [6,2,1,-1,0,12,8];
-        var sorted   = Quicksort.sort(integers);
-        expect(sorted).toEqual([-1,0,1,2,6,8,12]);
-      });
-      it("alphabetical", function() {
-        var alphabetical = ["c","d","i","a","f","f","w"];
-        var sorted       = Quicksort.sort(alphabetical);
-        expect(sorted).toEqual(["a","c","d","f","f","i","w"]);
+        var sorted    = Quicksort.sort(rows,2),
+            firstRow  = getCell(sorted,0,2),
+            secondRow = getCell(sorted,1,2),
+            thirdRow  = getCell(sorted,2,2);
+        expect(firstRow).toEqual('5');
+        expect(secondRow).toEqual('15');
+        expect(thirdRow).toEqual('23');
       });
       it("words", function() {
-        var alphabetical = ["cat","dog","in","a","fine","fate","went"];
-        var sorted       = Quicksort.sort(alphabetical);
-        expect(sorted).toEqual(["a","cat","dog","fate","fine","in","went"]);
-      });
-      it("mixed strings", function() {
-        var mixed  = ["c","1","i","5","f","f","-1"];
-        var sorted = Quicksort.sort(mixed);
-        expect(sorted).toEqual(['-1','1','5','c','f','f','i']);
+        var sorted    = Quicksort.sort(rows,0),
+            firstRow  = getCell(sorted,0,0),
+            secondRow = getCell(sorted,1,0),
+            thirdRow  = getCell(sorted,2,0);
+        expect(firstRow).toEqual('Amir');
+        expect(secondRow).toEqual('Julius');
+        expect(thirdRow).toEqual('Michael');
       });
     });
   });
 
   describe("partition", function() {
     describe("return object", function() {
-      var empty;
+      var partition;
       beforeEach(function() {
-        empty = Quicksort.partition([]);
+        partition = Quicksort.partition(rows,0);
       });
       it("has left attribute", function() {
-        expect(empty.left).toBeDefined();
+        expect(partition.left).toBeDefined();
       });
       it("has middle attribute", function() {
-        expect(empty.middle).toBeDefined();
+        expect(partition.middle).toBeDefined();
       });
       it("has right attribute", function() {
-        expect(empty.left).toBeDefined();
+        expect(partition.left).toBeDefined();
       });
     });
+
     describe("partitioning", function() {
       describe("middle",function() {
         var middled;
         beforeEach(function() {
-          middled = Quicksort.partition([1,1,1]);
+          for (var row = 0; row < rows.length; row++) {
+            rows[row].children[0].innerHTML = 1;
+          }
+          middled = Quicksort.partition(rows,0);
         });
         it("middle has elements", function() {
-          expect(middled.middle).toEqual([1,1,1]);
+          expect(middled.middle.length).toEqual(3);
         });
         it("left empty", function() {
           expect(middled.left).toEqual([]);
@@ -57,28 +70,38 @@ describe("Quicksort", function() {
           expect(middled.right).toEqual([]);
         });
       });
+
       describe("left/right",function() {
         var left,right;
         beforeEach(function() {
-          var lopsided  = ["c","b"];
-          var partition = Quicksort.partition(lopsided);
+          // reduce to two rows since partition point is random
+          delete rows[2]
+          rows.length   = 2; //
+          var partition = Quicksort.partition(rows,0);
           left          = partition.left;
           right         = partition.right;
         });
         it("at least one is empty", function() {
-          leftEmpty  = left[0]  == undefined;
-          rightEmpty = right[0] == undefined;
+          var leftEmpty  = left[0]  == undefined,
+              rightEmpty = right[0] == undefined;
           expect( leftEmpty && rightEmpty ).not.toBeTruthy();
         });
         it("only one has element", function() {
-          leftHasElement  = left.length  == 1
-          rightHasElement = right.length == 1
+          var leftHasElement  = left.length  == 1,
+              rightHasElement = right.length == 1;
           expect(leftHasElement && rightHasElement).toEqual(false);
         });
         it("sorts alphabetically", function() {
-          leftIsB  = left[0]  == "b"
-          rightIsC = right[0] == "c"
-          expect(leftIsB || rightIsC).toBeTruthy();
+          var leftIsJulius, rightIsMichael;
+          if ( left[0] != undefined ) {
+            var leftValue = getCell(left,0,0);
+            leftIsJulius  = leftValue == "Julius"
+          }
+          if (right[0] != undefined ) {
+            var rightValue = getCell(right,0,0);
+            rightIsMichael = rightValue == "Michael"
+          }
+          expect(leftIsJulius || rightIsMichael).toBeTruthy();
         });
       });
     });
@@ -87,9 +110,16 @@ describe("Quicksort", function() {
 
   describe("reconstructArray", function() {
     it("returns expected", function() {
-      var partition = {left: [1], middle: [2], right: [3]};
-      var array     = Quicksort.reconstructArray(partition);
+      var partition = {left: [1], middle: [2], right: [3]},
+          array     = Quicksort.reconstructArray(partition);
       expect(array).toEqual([1,2,3]);
+    });
+  });
+
+  describe('getRowValue', function() {
+    it('returns expected value',function() {
+      var value = Quicksort.getRowValue(row,0);
+      expect(value).toEqual('Julius');
     });
   });
 
